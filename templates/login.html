@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    <label for="username">Nume Utilizator:</label>
+    <input type="text" id="username" name="username" required><br>
+    
+    <label for="password">Parolă:</label>
+    <input type="password" id="password" name="password" required><br>
+    
+    <label for="departament">Departament:</label>
+    <select id="departament" name="departament">
+        <option value="Tehnic">Tehnic</option>
+        <option value="HR">HR</option>
+        <option value="IT">IT</option>
+    </select><br>
+    
+    <button type="submit">Login</button>
+</form>
+<a href="{{ url_for('creaza_cont') }}">Crează Cont</a>
+<a href="{{ url_for('sterge_cont') }}">Șterge Cont</a>
+<a href="{{ url_for('curata_pontaj_db') }}">Curăță Baza de Date</a>
+{% endblock %}

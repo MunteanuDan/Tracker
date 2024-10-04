@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Vizualizare Pontaj</h2>
+{% for user in users %}
+    <a href="{{ url_for('vizualizeaza_pontaj', username=user['nume']) }}">{{ user['nume'] }}</a><br>
+{% endfor %}
+<a href="{{ url_for('exporta_in_excel') }}">Exportă în Excel</a>
+{% endblock %}

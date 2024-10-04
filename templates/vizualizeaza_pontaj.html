@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Pontaj pentru {{ records[0]['nume'] }}</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Ora Intrare</th>
+            <th>Ora Iesire</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record['data'] }}</td>
+                <td>{{ record['ora_intrare'] }}</td>
+                <td>{{ record['ora_iesire'] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

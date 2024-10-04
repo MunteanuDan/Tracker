@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Crează Cont</h2>
+<form method="post">
+    <label for="username">Nume Utilizator:</label>
+    <input type="text" id="username" name="username" required><br>
+    
+    <label for="password">Parolă:</label>
+    <input type="password" id="password" name="password" required><br>
+    
+    <label for="role">Tip Cont:</label>
+    <select id="role" name="role">
+        <option value="admin">Admin</option>
+        <option value="viewer">Viewer</option>
+    </select><br>
+    
+    <label for="departament">Departament:</label>
+    <select id="departament" name="departament">
+        <option value="Tehnic">Tehnic</option>
+        <option value="HR">HR</option>
+        <option value="IT">IT</option>
+    </select><br>
+    
+    <button type="submit">Crează Cont</button>
+</form>
+{% endblock %}

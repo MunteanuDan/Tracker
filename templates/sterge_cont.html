@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Șterge Cont</h2>
+<form method="post">
+    <label for="username">Nume Utilizator:</label>
+    <input type="text" id="username" name="username" required><br>
+    
+    <label for="password">Parolă:</label>
+    <input type="password" id="password" name="password" required><br>
+    
+    <label for="departament">Departament:</label>
+    <select id="departament" name="departament">
+        <option value="Tehnic">Tehnic</option>
+        <option value="HR">HR</option>
+        <option value="IT">IT</option>
+    </select><br>
+    
+    <button type="submit">Șterge Cont</button>
+</form>
+{% endblock %}
