@@ -5,17 +5,21 @@
 <form method="post">
     <label for="data">Data:</label>
     <input type="date" id="data" name="data" required><br>
-    
+
     <label for="ora_intrare">Ora Intrare (HH:MM):</label>
     <input type="text" id="ora_intrare" name="ora_intrare" value="08:00" required><br>
-    
+
     <label for="ora_iesire">Ora Iesire (HH:MM):</label>
     <input type="text" id="ora_iesire" name="ora_iesire" value="16:00" required><br>
-    
+
     <label for="concediu">Concediu:</label>
     <input type="checkbox" id="concediu" name="concediu"><br>
-    
+
     <button type="submit">Adaugă Pontaj</button>
 </form>
-<a href="{{ url_for('exporta_in_excel') }}">Exportă în Excel</a>
+
+{% if session['role'] == 'viewer' %}
+    <a href="{{ url_for('exporta_in_excel') }}">Exportă în Excel</a>
+{% endif %}
+
 {% endblock %}

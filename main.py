@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
 import sqlite3
 from datetime import datetime, date, timedelta
-
 from openpyxl.workbook import Workbook
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -201,6 +201,9 @@ def curata_pontaj_db():
 
 @app.route('/exporta_in_excel')
 def exporta_in_excel():
+    if 'username' not in session or session.get('role') != 'viewer':
+        return redirect(url_for('login'))
+
     departament = session.get('departament')
     if not departament:
         return redirect(url_for('login'))
@@ -221,18 +224,22 @@ def exporta_in_excel():
             ws.append(["Data", "Intrare", "Iesire"])
             for record in records:
                 formatted_record = (
-                datetime.strptime(record['data'], '%Y-%m-%d').strftime('%d-%m-%Y'), record['ora_intrare'],
-                record['ora_iesire'])
+                    datetime.strptime(record['data'], '%Y-%m-%d').strftime('%d-%m-%Y'), record['ora_intrare'],
+                    record['ora_iesire']
+                )
                 ws.append(formatted_record)
 
     conn.close()
     if 'Sheet' in wb.sheetnames:
         wb.remove(wb['Sheet'])
 
+    # Salvează fișierul Excel temporar
     filepath = 'pontaj_export.xlsx'
     wb.save(filepath)
-    flash("Datele au fost exportate cu succes în Excel!")
-    return redirect(url_for('viewer'))
+
+    # Trimite fișierul către utilizator pentru descărcare
+    return send_file(filepath, as_attachment=True, download_name='pontaj_export.xlsx',
+                     mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 
 if __name__ == '__main__':
